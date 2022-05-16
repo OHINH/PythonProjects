@@ -15,6 +15,7 @@ def dashed_line():
         else:
             Tim.pendown()
 
+
 colors = ["black", "yellow", "red", "blue", "grey", "teal", "medium aquamarine"]
 
 def draw_a_polygon(nb_sides):
