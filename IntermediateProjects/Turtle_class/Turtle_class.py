@@ -6,9 +6,12 @@ Tim.shape("turtle")
 Tim.color("teal")
 
 
-for i in range(4):
-    Tim.forward(50)
-    Tim.rt(90)
+for i in range(25):
+    Tim.forward(10)
+    if i%2 == 0:
+        Tim.penup()
+    else:
+        Tim.pendown()
 
 
 
