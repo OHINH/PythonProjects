@@ -1,5 +1,4 @@
 # import all modules
-from curses import can_change_color
 from random import randint
 from random import choice
 from turtle import clear
@@ -48,7 +47,7 @@ print(f"\nAgainst B:{format_data(element2)}.")
 
 # ask for an input A/B, A for choice1 and B for choice2
 p_choice = input(
-    f"\nWho has the higher number of follower? A for {element1['name']}, B for {element2['name']}\n--> ").upper()
+    f"\nWho has the highest number of follower? A for {element1['name']}, B for {element2['name']}\n--> ").upper()
 
 
 

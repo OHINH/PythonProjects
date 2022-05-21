@@ -66,7 +66,7 @@ def spirograph(space_between_poly, nb_sides):
 
 screen = tl.Screen()
 screen.screensize(10000,10000)
-spirograph(space_between_poly=5, nb_sides=10)
+spirograph(space_between_poly=5, nb_sides=1)
 screen.screensize()
 screen.exitonclick()
 
