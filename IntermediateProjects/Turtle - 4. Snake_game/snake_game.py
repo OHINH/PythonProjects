@@ -1,5 +1,6 @@
 from turtle import Turtle, Screen, time
 from snake import Snake
+from food import Food
 import random
 
 t = Turtle()
@@ -13,6 +14,8 @@ screen.tracer(False)
 
 # create a snake body, aka three white turtles
 snake = Snake()
+food = Food()
+
 
 # control the snake
 screen.listen()
@@ -28,6 +31,10 @@ while game_is_on:
     screen.update()
     snake.move()  
     time.sleep(0.1)  
+    
+
+    if snake.head.distance(food) < 15:
+        food.refresh()
 
 screen.mainloop()
 

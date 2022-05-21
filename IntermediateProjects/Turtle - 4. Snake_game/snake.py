@@ -1,4 +1,5 @@
 from turtle import Turtle
+from food import Food
 INITIAL_POSITIONS = [(0,0), (-20,0), (-40,0)]
 MOVING_SPEED = 20
 UP = 90
@@ -6,7 +7,7 @@ DOWN = 270
 LEFT = 180
 RIGHT = 0
 
-class Snake():
+class Snake:
     
     def __init__(self):
         self.segments = []
@@ -44,6 +45,6 @@ class Snake():
     def m(self):
         if self.head.heading() != LEFT:
             self.head.setheading(RIGHT)
-
+    
     
 
