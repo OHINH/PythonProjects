@@ -4,7 +4,6 @@ from food import Food
 from scoreboard import Scoreboard
 import random
 
-t = Turtle()
 
 # setup screen
 screen = Screen()
