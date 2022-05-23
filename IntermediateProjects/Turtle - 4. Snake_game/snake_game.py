@@ -12,12 +12,6 @@ screen.bgcolor("black")
 screen.title("Classic snake game")
 screen.tracer(False)
 
-score_turtle = Turtle()
-score_turtle.penup()
-score_turtle.pencolor("blue")
-score_turtle.speed(0)
-score_turtle.goto(300, 500)
-
 # create a snake body, aka three white turtles
 snake = Snake()
 food = Food()
