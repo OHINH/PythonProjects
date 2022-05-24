@@ -2,7 +2,6 @@ from turtle import Turtle, Screen, time
 from snake import Snake
 from food import Food
 from scoreboard import Scoreboard
-import random
 
 
 # setup screen

@@ -1,23 +1,25 @@
 from turtle import Turtle
-Init_positions_left = (-350, 0)
-Init_positions_right = (350, 0)
-MOVING_SPEED = 20
 
 class Paddle(Turtle):
-    
-    def __init__(self, position) -> None:
-        self = Turtle("square")
+    def __init__(self, position):
+        super().__init__()
+        self.penup()
+        self.shape("square")
+        self.goto(position)
         self.color("white")
         self.shapesize(4, 1)
-        self.penup()
-        if position == "left":
-            self.goto(Init_positions_left)
-        elif position == "right":
-            self.goto(Init_positions_right)
+    
+    def move_up(self):
+        new_y = self.ycor() + 20
+        self.goto(self.xcor(), new_y)
 
+    def move_down(self):
+        new_y = self.ycor() - 20
+        self.goto(self.xcor(), new_y)
 
-class Ball(Paddle):
-    pass
+class Ball(Turtle):
+    def __init__(self) -> None:
+        super().
 
 class Scoreboard():
     pass
