@@ -77,12 +77,6 @@ class Scoreboard(Turtle):
     def sc_refresh(self):
         self.clear()
         self.write(arg=f"{self.score}", move=False, align="center", font=("Georgia", 60, "bold"))
-    
-    def game_over(self):
-        self.clear()
-        self.write(arg=f"GAME OVER. Final score: {self.score}.", align="center", font=("Georgia", 60, "bold"))
-    
-
 
 
 
