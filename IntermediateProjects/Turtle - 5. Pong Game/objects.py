@@ -46,6 +46,7 @@ class Ball(Turtle):
         self.shapesize(0.8, 0.8)
         self.color(GAME_COLOR)
         self.penup()
+        self.move_speed = 0.1
         self.x_pas = 10
         self.y_pas = 10
     
@@ -56,12 +57,15 @@ class Ball(Turtle):
 
     def bounce(self):
         self.y_pas *= -1
+        self.move_speed *= 0.9
     
     def bounce_on_paddle(self):
         self.x_pas *= -1
+        self.move_speed *= 0.9
     
     def recenter(self):
         self.goto(0,0)
+        self.move_speed = 0.1
 
 
 class Scoreboard(Turtle):
