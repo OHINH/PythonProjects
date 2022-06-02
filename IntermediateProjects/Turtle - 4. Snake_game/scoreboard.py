@@ -26,5 +26,3 @@ class Scoreboard(Turtle):
         self.score = 0
         self.sc_refresh()
 
-
-
