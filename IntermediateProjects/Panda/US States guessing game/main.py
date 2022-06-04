@@ -14,20 +14,19 @@ writer.hideturtle()
 
 data = pandas.read_csv("50_states.csv")
 states = data.state.to_list()
+not_guessed_states = states
 
-score = 0
-game_is_on = True
-while game_is_on:
-    answer_state = screen.textinput(title=f"Guess the State - {score}/50", prompt="Type in a State name.")
-    if answer_state.title() in states:
-        writer.goto(int(data[answer_state.title() == data.state].x), int(data[answer_state.title() == data.state].y))
-        writer.write(f"{answer_state.title()}")
-        score += 1
+
+while len(not_guessed_states) > 0:
+    answer_state = screen.textinput(title=f"Guess the State - {len(not_guessed_states)}/50", prompt="Type in a State name.").title()
+    if answer_state in states:
+        writer.goto(int(data[answer_state == data.state].x), int(data[answer_state == data.state].y))
+        writer.write(f"{answer_state}")
+        not_guessed_states.remove(answer_state)
     
-    if score == 50:
-        screen.textinput("You Won! Any words to say?")
-        game_is_on = False
+    if answer_state == "Exit":
+        print(f"The States you haven't guessed are: {not_guessed_states}")
+        new_data = pandas.DataFrame(not_guessed_states)
+        new_data.to_csv("missing_states.csv")
+        break
         
-
-
-screen.exitonclick()
