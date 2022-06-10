@@ -6,7 +6,7 @@ RED = "#e7305b"
 GREEN = "#9bdeac"
 YELLOW = "#f7f5dd"
 FONT_NAME = "Courier"
-WORK_MIN = 25
+WORK_MIN = 0.05
 SHORT_BREAK_MIN = 5
 LONG_BREAK_MIN = 20
 rep = 0
@@ -26,6 +26,8 @@ def reset_timer():
 # ---------------------------- TIMER MECHANISM ------------------------------- # 
 
 def start_timer():
+    window.attributes('-topmost', True)
+    window.attributes('-topmost', False)
     global rep
     rep += 1
     if rep % 8 == 0:
