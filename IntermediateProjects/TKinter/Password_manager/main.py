@@ -3,11 +3,30 @@ from tkinter import *
 from nltk.corpus import words
 import random
 import pyperclip
+import json
 
 EMAILS = ["olivierhinh@gmail.com", "olivier.hinh@azurreo.com", "olivier.hinh@edhec.com", "guest.pseudo@gmail.com"]
 WORDS_LIST = words.words()
+
+# ---------------------------- SEARCH LOGIN BUTTON ------------------------------- #
+def search_login():
+    website = entry_website.get()
+    try:
+        with open("data.json", "r") as data_file:
+            data = json.load(fp=data_file)
+    except FileNotFoundError:
+        messagebox.showinfo(title="Error", message="No Data File Found.")
+    else:
+        if website in data:
+            email = data[website]["email"]
+            password = data[website]["password"]
+            messagebox.showinfo(title=website, message=f"Email: {email} \npassword: {password}")
+        else:
+            messagebox.showinfo(title="Error", message=f"No website logins found for {website}")
+
 # ---------------------------- PASSWORD GENERATOR ------------------------------- #
 def generate_password():
+    entry_password.delete(0, END)
     word1 = random.choice(WORDS_LIST)
     word2 = random.choice(WORDS_LIST)
     random_num = random.randint(11, 99)
@@ -20,23 +39,40 @@ def add_data():
     website = entry_website.get()
     email = cbb_email_username.get()
     password = entry_password.get()
+    new_data = {
+        website: {
+            "email": email,
+            "password": password
+        }
+    }
 
     if len(website) == 0:
-        messagebox.showerror(title="Entry error", message="You forgot to type in a website, try again.")
+        messagebox.showerror(title="Website Entry error", message="You forgot to type in a website, try again.")
     elif len(email) == 0:
-        messagebox.showerror(title="Entry error", message="You forgot to select an email, try again.")
+        messagebox.showerror(title="Email Entry error", message="You forgot to select an email, try again.")
     elif len(password) < 8:
-        messagebox.showerror(title="Entry error", message="Your password is too short, try again.")
+        messagebox.showerror(title="Password Entry error", message="Your password is too short, try again.")
     
-    else:    
-        isok = messagebox.askokcancel(title="Confirmation", message=f"The logins for {website} you have entered are the ones below: \nemail: {email} \npassword: {password} \nDo you want to confirm?", )
-        if isok:
-            with open("data.csv", "a") as data:
-                data.writelines([website, " | ", email, " | ", password, "\n"])
-                entry_website.delete(0, END)
-                cbb_email_username.delete(0, END)
-                entry_password.delete(0, END)
+    else:
 
+        try:    
+            with open("data.json", "r") as data_file:
+                # reading old data
+                data = json.load(data_file)
+        except FileNotFoundError:
+            with open("data.json", "w") as data_file:
+                json.dump(new_data, data_file, indent=4)
+        else:
+            # update old data with new data
+            data.update(new_data)
+    
+            with open("data.json", "w") as data_file:
+                # saving updated data
+                json.dump(data, data_file, indent=4)
+        finally:
+            entry_website.delete(0, END)
+            cbb_email_username.delete(0, END)
+            entry_password.delete(0, END)
 
 # ---------------------------- UI SETUP ------------------------------- #
 
@@ -59,7 +95,7 @@ text_password.grid(row=3, column=0)
 
 
 entry_website = Entry()
-entry_website.grid(row=1, column=1, columnspan=2, sticky="EW")
+entry_website.grid(row=1, column=1, sticky="EW")
 entry_website.focus()
 cbb_email_username = ttk.Combobox(window, values=EMAILS)
 cbb_email_username.grid(row=2, column=1, columnspan=2, sticky="EW")
@@ -71,6 +107,8 @@ button_generate_password = Button(text="Generate Password", command=generate_pas
 button_generate_password.grid(row=3, column=2, sticky="EW")
 button_add = Button(text="Add", command=add_data)
 button_add.grid(row=4, column=1, columnspan=2, sticky="EW")
+button_search = Button(text="Search", command=search_login)
+button_search.grid(row=1, column=2, sticky=EW)
 
 
 
