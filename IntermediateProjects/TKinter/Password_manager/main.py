@@ -28,9 +28,13 @@ def search_login():
 def generate_password():
     entry_password.delete(0, END)
     word1 = random.choice(WORDS_LIST)
+    if len(word1) > 7:
+        word1 = word1[0:6]
     word2 = random.choice(WORDS_LIST)
+    if len(word2) > 7:
+        word2 = word2[0:6]
     random_num = random.randint(11, 99)
-    password = word1 + "-" + word2 + "-" + str(random_num)
+    password = word1 + word2 + str(random_num)
     entry_password.insert(0, password)
     pyperclip.copy(password)
 
